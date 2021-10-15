@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#C67472',
+    backgroundColor: '#d11000',
     height: 60,
     flexDirection: 'row',
     borderRadius: 10,

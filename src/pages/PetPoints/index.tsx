@@ -96,10 +96,9 @@ const PetPoints = () => {
     <>
       <View style={styles.container}>
         <TouchableOpacity onPress={handleNavigateBack}>
-          <Icon name="arrow-left" size={25} color="#C67472" />
+          <Icon name="arrow-left" size={25} color="#d11000" />
         </TouchableOpacity>
 
-        <Text style={styles.title}><Emoji name="blush" style={{ fontSize: 20 }} /> Seja bem-vinde!</Text>
         <Text style={styles.description}>Encontre no mapa um pet esperando por você.</Text>
 
         <View style={styles.mapContainer}>
@@ -201,7 +200,7 @@ const styles = StyleSheet.create({
   mapMarkerContainer: {
     width: 90,
     height: 70,
-    backgroundColor: '#C67472',
+    backgroundColor: '#d11000',
     flexDirection: 'column',
     borderRadius: 8,
     overflow: 'hidden',
@@ -246,7 +245,7 @@ const styles = StyleSheet.create({
   },
 
   selectedItem: {
-    borderColor: '#C67472',
+    borderColor: '#d11000',
     backgroundColor: 'rgba(198, 116, 114, .1)',
     borderWidth: 2,
   },
