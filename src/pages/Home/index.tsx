@@ -5,6 +5,7 @@ import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import RNPickerSelect from 'react-native-picker-select'
 import axios from 'axios'
+import { color } from 'react-native-reanimated'
 
 const Home = () => {
   const navigation = useNavigation()

@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
 
   pointImage: {
     width: '100%',
-    height: 150,
+    height: 200,
     resizeMode: 'cover',
     borderRadius: 10,
     marginTop: 32,

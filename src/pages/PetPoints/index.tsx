@@ -99,7 +99,30 @@ const PetPoints = () => {
           <Icon name="arrow-left" size={25} color="#d11000" />
         </TouchableOpacity>
 
-        <Text style={styles.description}>Encontre no mapa um pet esperando por você.</Text>
+        <Text style={styles.description}>Escolha qual pet deseja adotar.</Text>
+
+        <View style={styles.itemsContainer}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
+          {category.map(category => (
+            <TouchableOpacity
+              activeOpacity={0.6}
+              key={String(category.id)}
+              style={[
+                styles.item,
+                selectedCategory.includes(category.id) ? styles.selectedItem : {}
+              ]}
+              onPress={() => handleSelectItem(category.id)}>
+              <SvgUri width={42} height={42} uri={category.image_url} />
+              <Text style={styles.itemTitle}>{category.title}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+        </View>
+
+        <Text style={styles.description}>Encontre no mapa seu pet.</Text>
 
         <View style={styles.mapContainer}>
           {initialPosition[0] !== 0 && (
@@ -134,27 +157,7 @@ const PetPoints = () => {
           )}
         </View>
       </View>
-      <View style={styles.itemsContainer}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 32 }}
-        >
-          {category.map(category => (
-            <TouchableOpacity
-              activeOpacity={0.6}
-              key={String(category.id)}
-              style={[
-                styles.item,
-                selectedCategory.includes(category.id) ? styles.selectedItem : {}
-              ]}
-              onPress={() => handleSelectItem(category.id)}>
-              <SvgUri width={42} height={42} uri={category.image_url} />
-              <Text style={styles.itemTitle}>{category.title}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+
     </>
   )
 }
@@ -185,6 +188,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     marginTop: 16,
+    marginBottom: 10,
   },
 
   map: {
@@ -224,15 +228,15 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flexDirection: 'row',
     marginTop: 16,
-    marginBottom: 32,
+    marginBottom: 10,
   },
 
   item: {
     backgroundColor: '#fff',
     borderWidth: 2,
     borderColor: '#eee',
-    height: 120,
-    width: 120,
+    height: 100,
+    width: 100,
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingTop: 20,
@@ -240,7 +244,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
     alignItems: 'center',
     justifyContent: 'space-between',
-
     textAlign: 'center',
   },
 
