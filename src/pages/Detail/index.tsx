@@ -22,6 +22,8 @@ interface Data {
     whatsapp: string,
     city: string,
     uf: string,
+    latitude: string;
+    longitude: string;
   },
   category: {
     title: string,
@@ -57,6 +59,10 @@ const Detail = () => {
     Linking.openURL(`whatsapp://send?phone=${data.petpoint.whatsapp}&text=Olá, ${data.petpoint.username}, tenho interesse em adotar o(a) ${data.petpoint.petname}!`)
   }
 
+  function handleDirections() {
+    Linking.openURL(`google.navigation:q=${data.petpoint.latitude},${data.petpoint.longitude}`);
+  }
+
   if (!data.petpoint) {
     return null // Loading screen
   }
@@ -88,8 +94,8 @@ const Detail = () => {
           </View>
 
           <View style={styles.address}>
-            <Text style={styles.titleField}>Endereço</Text>
-            <Text style={styles.dataField}>{data.petpoint.city}, {data.petpoint.uf}</Text>
+            <Text style={styles.titleField}>Email</Text>
+            <Text style={styles.dataField}>{data.petpoint.email}</Text>
           </View>
         </ScrollView>
       </View>
@@ -98,9 +104,9 @@ const Detail = () => {
           <Icon2 name='whatsapp' size={24} color="#FFF" />
           <Text style={styles.buttonText}>WhatsApp</Text>
         </RectButton>
-        <RectButton style={styles.button} onPress={handleComposeMail}>
-          <Icon name='mail' size={24} color="#FFF" />
-          <Text style={styles.buttonText}>E-mail</Text>
+        <RectButton style={styles.button} onPress={handleDirections}>
+          <Icon2 name="car" size={20} color="#FFF" />
+          <Text style={styles.buttonText}>Como chegar</Text>
         </RectButton>
       </View>
     </SafeAreaView>
@@ -178,7 +184,7 @@ const styles = StyleSheet.create({
   buttonText: {
     marginLeft: 8,
     color: '#FFF',
-    fontSize: 18,
+    fontSize: 15,
     fontFamily: 'Comfortaa_500Medium',
   },
 });
