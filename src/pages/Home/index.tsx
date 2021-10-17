@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Feather as Icon } from '@expo/vector-icons'
-import { View, ImageBackground, Image, StyleSheet, Text, TextInput } from 'react-native'
+import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import RNPickerSelect from 'react-native-picker-select'
 import axios from 'axios'
-import { color } from 'react-native-reanimated'
 
 const Home = () => {
   const navigation = useNavigation()
@@ -68,28 +67,11 @@ const Home = () => {
     >
       <View style={styles.main}>
         <Image source={require('../../assets/logo.png')} />
-        <Text style={styles.title}>O lugar ideal para encontrar seu novo pet.</Text>
+        <Text style={styles.title}>O lugar ideal para encontrar seu novo pet</Text>
         <Text style={styles.description}>Ajudamos pessoas a encontrarem animais de estimação disponíveis para adoção de forma fácil e direta.</Text>
       </View>
 
       <View style={styles.footer}>
-
-        <RNPickerSelect
-          style={pickerSelectStyles}
-          onValueChange={(value) => setSelectedUf(value)}
-          placeholder={{ label: "Selecione um estado", value: null }}
-          items={ufs}
-          Icon={() => <Icon name="chevron-down" size={20} color="#A0A0B2" />}
-        />
-
-        <RNPickerSelect
-          style={pickerSelectStyles}
-          onValueChange={(value) => setSelectedCity(value)}
-          placeholder={{ label: "Selecione uma cidade", value: null }}
-          items={cities}
-          disabled={cities.length === 0}
-          Icon={() => <Icon name="chevron-down" size={20} color="#A0A0B2" />}
-        />
 
         <RectButton style={styles.button} onPress={handleNavigateToPetPoints}>
           <View style={styles.buttonIcon}>
