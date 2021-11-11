@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppLoading } from 'expo'
+import AppLoading from 'expo-app-loading'
 import { StatusBar, View } from 'react-native';
 import { Comfortaa_400Regular, Comfortaa_500Medium, Comfortaa_600SemiBold, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa'
 import { FredokaOne_400Regular, useFonts } from '@expo-google-fonts/fredoka-one'
