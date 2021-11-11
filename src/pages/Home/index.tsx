@@ -5,6 +5,7 @@ import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import RNPickerSelect from 'react-native-picker-select'
 import axios from 'axios'
+import * as AuthSession from 'expo-auth-session'
 
 import { Button } from '../../components/Button';
 
@@ -16,7 +17,18 @@ const Home = () => {
   const [selectedUf, setSelectedUf] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
 
-  function handleNavigateToPetPoints() {
+  async function handleNavigateToPetPoints() {
+    const CLIENT_ID = '60164303098-jj3sbtdgtoljpq4oqrvtvc5cnvsj4k9o.apps.googleusercontent.com';
+    const REDIRECT_URI = 'https://auth.expo.io/@vitorhr10/mobile';
+    const RESPONSE_TYPE = 'token';
+    const SCOPE = encodeURI('profile email');
+
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
+
+    const reponse = await AuthSession.startAsync({ authUrl });
+
+    console.log(reponse);
+
     navigation.navigate('PetPoints', {
       uf: selectedUf,
       city: selectedCity
