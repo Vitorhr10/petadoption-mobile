@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Feather as Icon } from '@expo/vector-icons'
 import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
-import RNPickerSelect from 'react-native-picker-select'
 import axios from 'axios'
+import * as AuthSession from 'expo-auth-session'
+
+import { Button } from '../../components/Button';
+
+const { CLIENT_ID } = process.env;
+const { REDIRECT_URI } = process.env;
+
+interface AuthResponse {
+  type: string;
+  params: {
+    access_token: string;
+  }
+}
 
 const Home = () => {
   const navigation = useNavigation()
@@ -14,11 +24,22 @@ const Home = () => {
   const [selectedUf, setSelectedUf] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
 
-  function handleNavigateToPetPoints() {
-    navigation.navigate('PetPoints', {
-      uf: selectedUf,
-      city: selectedCity
-    })
+  async function handleNavigateToPetPoints() {
+    
+    const RESPONSE_TYPE = 'token';
+    const SCOPE = encodeURI('profile email');
+
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
+
+    const { type, params} = await AuthSession.startAsync({ authUrl }) as AuthResponse;
+
+    if(type === 'success') {
+      navigation.navigate('PetPoints', {
+        token: params.access_token,
+        uf: selectedUf,
+        city: selectedCity
+      })
+    }
   }
 
   interface IBGEUFResponse {
@@ -73,16 +94,12 @@ const Home = () => {
 
       <View style={styles.footer}>
 
-        <RectButton style={styles.button} onPress={handleNavigateToPetPoints}>
-          <View style={styles.buttonIcon}>
-            <Text>
-              <Icon name="arrow-right" color="#FFF" size={24} />
-            </Text>
-          </View>
-          <Text style={styles.buttonText}>
-            Entrar
-          </Text>
-        </RectButton>
+          <Button
+            title="Entrar com Google"
+            icon="social-google"
+            onPress={handleNavigateToPetPoints}
+          />
+
       </View>
     </ImageBackground>
   )
@@ -156,7 +173,8 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontFamily: 'Comfortaa_500Medium',
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: 100,
   }
 });
 

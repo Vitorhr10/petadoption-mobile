@@ -2,6 +2,7 @@
   "expo": {
     "name": "Pet Adoption",
     "slug": "mobile",
+    "scheme": "mobile",
     "platforms": [
       "ios",
       "android",

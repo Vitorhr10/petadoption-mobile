@@ -26,10 +26,17 @@ interface PetPoints {
 
 interface Params {
   uf: string,
-  city: string
+  city: string,
+  token: string
+}
+
+interface Profile {
+  email: string;
+  given_name: string;
 }
 
 const PetPoints = () => {
+  const [profile, setProfile] = useState({} as Profile)
   const [category, setCategory] = useState<Category[]>([])
   const [petPoints, setPetPoints] = useState<PetPoints[]>([])
   const [selectedCategory, setSelectedCategory] = useState<number[]>([])
@@ -39,7 +46,19 @@ const PetPoints = () => {
   const navigation = useNavigation()
   const route = useRoute()
 
+  const { token } = route.params as Params
+
   const routeParams = route.params as Params
+
+  async function loadProfile() {
+    const response = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?alt=json&access_token=${token}`);
+    const userinfo = await response.json();
+    setProfile(userinfo);
+  }
+
+  useEffect(() => {
+    loadProfile()
+  }, []);
 
   useEffect(() => {
     async function loadPosition() {
@@ -98,6 +117,8 @@ const PetPoints = () => {
         <TouchableOpacity onPress={handleNavigateBack}>
           <Icon name="arrow-left" size={25} color="#d11000" />
         </TouchableOpacity>
+
+        <Text style={styles.description}>Bem vindo, {profile.given_name}</Text>
 
         <Text style={styles.description}>Escolha qual pet deseja adotar.</Text>
 
