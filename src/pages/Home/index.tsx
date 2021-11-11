@@ -6,6 +6,9 @@ import * as AuthSession from 'expo-auth-session'
 
 import { Button } from '../../components/Button';
 
+const { CLIENT_ID } = process.env;
+const { REDIRECT_URI } = process.env;
+
 interface AuthResponse {
   type: string;
   params: {
@@ -22,8 +25,7 @@ const Home = () => {
   const [selectedCity, setSelectedCity] = useState(null);
 
   async function handleNavigateToPetPoints() {
-    const CLIENT_ID = '60164303098-jj3sbtdgtoljpq4oqrvtvc5cnvsj4k9o.apps.googleusercontent.com';
-    const REDIRECT_URI = 'https://auth.expo.io/@vitorhr10/mobile';
+    
     const RESPONSE_TYPE = 'token';
     const SCOPE = encodeURI('profile email');
 
