@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Feather as Icon } from '@expo/vector-icons'
 import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
-import RNPickerSelect from 'react-native-picker-select'
 import axios from 'axios'
 import * as AuthSession from 'expo-auth-session'
 
 import { Button } from '../../components/Button';
+
+interface AuthResponse {
+  type: string;
+  params: {
+    access_token: string;
+  }
+}
 
 const Home = () => {
   const navigation = useNavigation()
@@ -25,14 +29,15 @@ const Home = () => {
 
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
 
-    const reponse = await AuthSession.startAsync({ authUrl });
+    const { type, params} = await AuthSession.startAsync({ authUrl }) as AuthResponse;
 
-    console.log(reponse);
-
-    navigation.navigate('PetPoints', {
-      uf: selectedUf,
-      city: selectedCity
-    })
+    if(type === 'success') {
+      navigation.navigate('PetPoints', {
+        token: params.access_token,
+        uf: selectedUf,
+        city: selectedCity
+      })
+    }
   }
 
   interface IBGEUFResponse {
@@ -47,13 +52,6 @@ const Home = () => {
   interface PickerItem {
     label: string;
     value: string;
-  }
-
-  interface AuthResponse {
-    type: string;
-    params: {
-      access_token: string;
-    }
   }
 
   useEffect(() => {
