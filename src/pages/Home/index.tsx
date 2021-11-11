@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native'
 import RNPickerSelect from 'react-native-picker-select'
 import axios from 'axios'
 
+import { Button } from '../../components/Button';
+
 const Home = () => {
   const navigation = useNavigation()
 
@@ -33,6 +35,13 @@ const Home = () => {
   interface PickerItem {
     label: string;
     value: string;
+  }
+
+  interface AuthResponse {
+    type: string;
+    params: {
+      access_token: string;
+    }
   }
 
   useEffect(() => {
@@ -73,16 +82,12 @@ const Home = () => {
 
       <View style={styles.footer}>
 
-        <RectButton style={styles.button} onPress={handleNavigateToPetPoints}>
-          <View style={styles.buttonIcon}>
-            <Text>
-              <Icon name="arrow-right" color="#FFF" size={24} />
-            </Text>
-          </View>
-          <Text style={styles.buttonText}>
-            Entrar
-          </Text>
-        </RectButton>
+          <Button
+            title="Entrar com Google"
+            icon="social-google"
+            onPress={handleNavigateToPetPoints}
+          />
+
       </View>
     </ImageBackground>
   )
@@ -156,7 +161,8 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontFamily: 'Comfortaa_500Medium',
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: 100,
   }
 });
 
