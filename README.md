@@ -18,7 +18,7 @@ Esta aplicação tem como objetivo ser um cliente mobile para consumir os dados 
 5. Instale as dependências do projeto: `yarn`
 6. Rode a aplicação: `yarn start` ou `expo start`. Irá aparecer um QR code no navegador, porém será necessário baixar o aplicativo Expo na Play Store para abrir.
 7. Instale o aplicativo Expo no celular para poder rodar o aplicativo em modo desenvolvimento.
-8. Acesse este [link]https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&gl=US para baixar o aplicativo no celular.
+8. Acesse este [link](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&gl=US) para baixar o aplicativo no celular.
 9. Excaneie o QR code pelo aplicativo Expo.
 
 ## Como contribuir
