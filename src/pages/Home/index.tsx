@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native'
+import { View, ImageBackground, Image, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 import * as AuthSession from 'expo-auth-session'

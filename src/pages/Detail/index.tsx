@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Feather as Icon, FontAwesome as Icon2 } from '@expo/vector-icons'
-import { View, StyleSheet, TouchableOpacity, Image, Text, ScrollView, SafeAreaView, Linking } from 'react-native'
-import Constants from 'expo-constants'
+import { View, TouchableOpacity, Image, Text, ScrollView, SafeAreaView, Linking } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
 import * as MailComposer from 'expo-mail-composer'
